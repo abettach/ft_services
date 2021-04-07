@@ -1,0 +1,11 @@
+to apply an configuration file use:
+
+kubctl apply -f config-file.yaml
+
+kubectl get nodes ==> to check nodes
+kubectl get pod ==> to show all pods
+kubectl get services ==> to show all services
+
+to creat a kubectl deployment
+
+kubectl create deployment NAME --image=image
