@@ -32,7 +32,7 @@ $cfg['Servers'][$i]['compress'] = false;
 $cfg['Servers'][$i]['AllowNoPassword'] = false;
 $cfg['PmaNoRelation_DisableWarning'] = TRUE;
 $cfg['PmaAbsoluteUri'] = '/';
-
+#https://docs.phpmyadmin.net/fr/latest/config.html
 /**
  * phpMyAdmin configuration storage settings.
  */
