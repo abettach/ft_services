@@ -1,3 +1,4 @@
+rc-service telegraf start
 /etc/init.d/mariadb setup
 rc-service mariadb start
 echo "--------setup--------"
@@ -11,7 +12,20 @@ rc-service mariadb stop
 sed -i "s/skip-networking/# skip-networking/g" /etc/my.cnf.d/mariadb-server.cnf
 rc-service mariadb start
 
-while true;
-do
-        sleep 2
-done
+while sleep 2;
+	do
+		pgrep telegraf
+		telegraf_status=$? 
+		if [ $telegraf_status  -ne 0 ]; then
+			echo "Telegraf service is not running ..."
+			exit 1
+		fi
+		pgrep mysql
+		mariadb_status=$?
+		if [ $mariadb_status -ne 0 ]; then
+			echo "Mariadb service is not running ..."
+			exit 1
+		fi
+
+	done
+exit

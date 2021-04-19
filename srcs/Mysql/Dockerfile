@@ -1,10 +1,10 @@
 FROM alpine:3.12.3
 
-# VOLUME [ “/sys/fs/cgroup” ]
 RUN apk update
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
-RUN apk add mariadb mariadb-common mariadb-client openrc && apk add telegraf
+RUN apk add mariadb mariadb-common mariadb-client openrc
 RUN openrc && touch /run/openrc/softlevel
+RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+RUN apk add telegraf
 COPY ./srcs/telegraf.conf /etc/telegraf.conf
 COPY ./srcs/wordpress.sql /
 COPY ./srcs/setup.sh /

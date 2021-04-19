@@ -3,9 +3,20 @@ rc-service telegraf start
 rc-service nginx start
 sleep 2
 
-while true;
-do
-        sleep 2
-done
+while sleep 2;
+	do
+        pgrep telegraf
+		telegraf_status=$?
+		if [ $telegraf_status -ne 0 ]; then
+			echo "Telegraf service is not running ..."
+			exit 1
+		fi
+		pgrep nginx 
+		nginx_status=$?
+		if [ $nginx_status -ne 0 ]; then
+			echo "Influxdb service is not running ..."
+			exit 1
+		fi
 
-exit 0
+	done
+exit

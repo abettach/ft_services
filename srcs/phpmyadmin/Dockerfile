@@ -1,7 +1,6 @@
 FROM alpine:3.12.3
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
-RUN apk update && apk add nginx && apk add wget && apk add telegraf
+RUN apk update && apk add nginx && apk add wget
 RUN apk add openrc && rc-update add nginx default
 RUN rc-status && touch /run/openrc/softlevel 
 RUN adduser -D -g 'www' www && mkdir /www
@@ -19,6 +18,10 @@ RUN tar zxvf phpMyAdmin-5.1.0-all-languages.tar.gz
 RUN rm phpMyAdmin-5.1.0-all-languages.tar.gz
 RUN mv phpMyAdmin-5.1.0-all-languages /www/phpmyadmin
 RUN chmod -R 777 /www/phpmyadmin
+#install telegraf
+RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+RUN apk add telegraf
+COPY ./srcs/telegraf.conf /etc/telegraf.conf
 COPY ./srcs/setup.sh /setup.sh
 RUN cd /www/phpmyadmin/ &&  rm -rf config.sample.inc.php
 ADD ./srcs/config.inc.php /www/phpmyadmin/config.inc.php

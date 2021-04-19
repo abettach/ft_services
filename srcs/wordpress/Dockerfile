@@ -1,7 +1,6 @@
 FROM alpine:3.12.3
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
-RUN apk update && apk add wget && apk add nginx && apk add openrc  && apk add telegraf
+RUN apk update && apk add wget && apk add nginx && apk add openrc
 RUN rc-update add nginx default
 RUN rc-status && touch /run/openrc/softlevel
 RUN adduser -D -g 'www' www
@@ -21,6 +20,10 @@ RUN rm latest.tar.gz
 RUN mv wordpress /www
 RUN chown -R 777 /www/wordpress
 COPY ./srcs/wp-config.php /www/wordpress/wp-config.php
+#install telegraf
+RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
+RUN apk add telegraf
+COPY ./srcs/telegraf.conf /etc/telegraf.conf
 COPY ./srcs/run.sh /run.sh
 RUN chmod +x /run.sh
 EXPOSE 5050

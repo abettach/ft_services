@@ -2,10 +2,18 @@ to apply an configuration file use:
 
 kubctl apply -f config-file.yaml
 
-kubectl get nodes ==> to check nodes
-kubectl get pod ==> to show all pods
-kubectl get services ==> to show all services
+kubectl get nodes -ne> to check nodes
+kubectl get pod -ne> to show all pods
+kubectl get services -ne> to show all services
 
 to creat a kubectl deployment
 
 kubectl create deployment NAME --image=image
+
+how to get the grafana.db
+
+kubectl get pods
+kubectl exec -it (pod name) -- sh
+cd data/
+in the new terminal
+kubectl cp (grafana pod name):/grafana/data/grafana.db ~/Desktop/grafana.db

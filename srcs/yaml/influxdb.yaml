@@ -10,23 +10,7 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: influxdb   
-  labels:
-    app: influxdb
-spec:
-  type: ClusterIP
-  selector:
-    app: influxdb
-  ports:
-    - name: influxdb
-      protocol: TCP
-      port: 8086
-      targetPort: 8086
+      storage: 5Gi
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -57,3 +41,19 @@ spec:
       - name: influxdb-storage
         persistentVolumeClaim:
           claimName: influxdb-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb   
+  labels:
+    app: influxdb
+spec:
+  type: ClusterIP
+  selector:
+    app: influxdb
+  ports:
+    - name: influxdb
+      protocol: TCP
+      port: 8086
+      targetPort: 8086
