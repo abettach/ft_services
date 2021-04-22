@@ -1,4 +1,5 @@
 rc-service telegraf start
+sleep 2
 
 if [ ! -f "/var/lib/mysql/ib_buffer_pool" ]; then
 	/etc/init.d/mariadb setup
@@ -12,10 +13,13 @@ if [ ! -f "/var/lib/mysql/ib_buffer_pool" ]; then
 	echo "-----------done----------"
 	rc-service mariadb stop
 fi
+sleep 2
 
 sed -i "s/skip-networking/# skip-networking/g" /etc/my.cnf.d/mariadb-server.cnf
+sleep 2
 
 rc-service mariadb start
+sleep 2
 
 while sleep 2;
 	do

@@ -1,5 +1,8 @@
 rc-service telegraf start
+sleep 2
+
 cd /grafana/bin && ./grafana-server
+sleep 2
 
 while sleep 2;
 	do

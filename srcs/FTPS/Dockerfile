@@ -6,12 +6,12 @@ RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repos
 RUN apk add telegraf
 COPY ./srcs/telegraf.conf /etc/telegraf.conf
 COPY ./srcs/vsftpd.conf /etc/vsftpd/vsftpd.conf
-RUN echo -e "abettach\nabettach" | adduser abettach
-RUN echo "abettach" | tee -a /etc/vsftpd.userlist
+COPY ./srcs/password /
+RUN adduser abettach < /password
+COPY ./srcs/vsftpd.userlist /etc/vsftpd.userlist
 RUN apk add openssl
 RUN openssl req -x509 -nodes -days 365 -subj "/C=CA/ST=QC/O=Company, Inc./CN=mydomain.com" -addext "subjectAltName=DNS:mydomain.com" -newkey rsa:2048 -keyout /etc/ssl/private/vsftpd.pem -out /etc/ssl/private/vsftpd.pem
 COPY ./srcs/setup.sh /setup.sh
 RUN chmod +x /setup.sh
 EXPOSE 21
-CMD sh setup.sh 
-
+CMD sh setup.sh

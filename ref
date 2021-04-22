@@ -1,6 +1,0 @@
-#mysql yaml file
-https://cloud.netapp.com/blog/how-to-set-up-mysql-kubernetes-deployments
-
-#metallb yanl file config
-https://metallb.universe.tf/installation/
-https://github.com/metallb/metallb/blob/main/manifests/example-config.yaml

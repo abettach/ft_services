@@ -1,6 +1,12 @@
 rc-service telegraf start
+sleep 2
+
 rc-service nginx start
+sleep 2
+
 rc-service php-fpm7 start
+sleep 2
+
 
 while sleep 2;
 	do

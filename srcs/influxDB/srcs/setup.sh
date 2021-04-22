@@ -1,5 +1,7 @@
 rc-service telegraf start
+sleep 2
 rc-service influxdb start
+sleep 2
 
 while sleep 2;
 	do
