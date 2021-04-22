@@ -11,7 +11,6 @@ RUN chown -R www:www /www
 RUN mv /etc/nginx/nginx.conf /etc/nginx/nginx.conf.orig
 COPY ./srcs/nginx.conf /etc/nginx/
 COPY ./srcs/index.html /www/
-#install telegraf
 RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN apk add telegraf
 COPY ./srcs/telegraf.conf /etc/telegraf.conf

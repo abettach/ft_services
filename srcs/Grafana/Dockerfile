@@ -7,11 +7,9 @@ RUN wget https://dl.grafana.com/oss/release/grafana-7.5.2.linux-amd64.tar.gz
 RUN tar -zxvf grafana-7.5.2.linux-amd64.tar.gz
 RUN mv grafana-7.5.2 grafana
 RUN rm -rf grafana-7.5.2.linux-amd64.tar.gz
-#install telegraf
 RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN apk add telegraf
 COPY ./srcs/telegraf.conf /etc/telegraf.conf
-# COPY ./srcs/defaults.ini /grafana/conf/defaults.ini
 COPY ./srcs/grafana.db /grafana/data/grafana.db
 COPY ./srcs/setup.sh /
 RUN chmod +x /setup.sh

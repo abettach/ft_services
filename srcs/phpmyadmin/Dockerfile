@@ -18,7 +18,6 @@ RUN tar zxvf phpMyAdmin-5.1.0-all-languages.tar.gz
 RUN rm phpMyAdmin-5.1.0-all-languages.tar.gz
 RUN mv phpMyAdmin-5.1.0-all-languages /www/phpmyadmin
 RUN chmod -R 777 /www/phpmyadmin
-#install telegraf
 RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN apk add telegraf
 COPY ./srcs/telegraf.conf /etc/telegraf.conf

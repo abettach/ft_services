@@ -20,11 +20,10 @@ RUN rm latest.tar.gz
 RUN mv wordpress /www
 RUN chown -R 777 /www/wordpress
 COPY ./srcs/wp-config.php /www/wordpress/wp-config.php
-#install telegraf
 RUN	echo "http://dl-cdn.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories
 RUN apk add telegraf
 COPY ./srcs/telegraf.conf /etc/telegraf.conf
-COPY ./srcs/run.sh /run.sh
-RUN chmod +x /run.sh
+COPY ./srcs/setup.sh /setup.sh
+RUN chmod +x /setup.sh
 EXPOSE 5050
-CMD sh run.sh
+CMD sh setup.sh

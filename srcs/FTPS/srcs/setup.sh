@@ -1,5 +1,5 @@
 rc-service telegraf start
-rc-service influxdb start
+rc-service vsftpd start
 
 while sleep 2;
 	do
@@ -9,9 +9,9 @@ while sleep 2;
 			echo "Telegraf service is not running ..."
 			exit 1
 		fi
-		pgrep influxd
-		influxdb_status=$?
-		if [ $influxdb_status != 0 ]; then
+		pgrep vsftpd
+		vsftpd=$?
+		if [ $vsftpd_status != 0 ]; then
 			echo "Influxdb service is not running ..."
 			exit 1
 		fi
